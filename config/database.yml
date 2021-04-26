@@ -21,8 +21,13 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+local_credentials: &local_credentials
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+
 development:
   <<: *default
+  <<: *local_credentials
   database: url_shortener_api_development
 
   # The specified database role being used to connect to postgres.
@@ -57,6 +62,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  <<: *local_credentials
   database: url_shortener_api_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
