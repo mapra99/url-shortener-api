@@ -7,7 +7,6 @@ Rails.application.routes.draw do
       resources :short_urls, only: [:create] do
         collection do
           get 'stats'
-          get 'redirect'
         end
       end
     end
