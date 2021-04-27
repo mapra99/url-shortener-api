@@ -1,0 +1,2 @@
+class ShortUrlVisit < ApplicationRecord
+end
