@@ -8,6 +8,7 @@ class Api::V1::ShortUrlsController < Api::V1::ApplicationController
   end
 
   def stats
+    @short_urls = ShortUrl.with_ordered_visits
   end
 
   def redirect

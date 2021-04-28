@@ -12,6 +12,9 @@ class ShortUrl < ApplicationRecord
 
   before_save :generate_path
 
+  scope :ordered_by_recent, -> { order(created_at: :desc) }
+  scope :with_ordered_visits, -> { includes(:visits).ordered_by_recent.order('short_url_visits.visited_at DESC') }
+
   private
 
   def generate_path
