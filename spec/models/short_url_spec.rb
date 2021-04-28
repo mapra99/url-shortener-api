@@ -7,10 +7,10 @@ RSpec.describe ShortUrl, type: :model do
   end
 
   context 'validations' do
-    subject { build(:short_url) }
+    subject { build(:custom_short_url) }
 
     it { should validate_presence_of(:original_url) }
-    it { should validate_uniqueness_of(:original_url) }
+    it { should validate_uniqueness_of(:transformed_path) }
 
     describe 'original URL validations' do
       context 'valid formats' do
@@ -43,6 +43,42 @@ RSpec.describe ShortUrl, type: :model do
 
         example 'a path' do
           subject.original_url = '/one_path/no_domain'
+          expect(subject).not_to be_valid
+        end
+      end
+    end
+
+    describe 'custom path validations' do
+      context 'invalid formats' do
+        example 'simple path' do
+          subject.transformed_path = '/simple-path'
+          expect(subject).to be_valid
+        end
+
+        example 'deep path' do
+          subject.transformed_path = '/simple-path/deeper-path'
+          expect(subject).to be_valid
+        end
+
+        example 'with query params' do
+          subject.transformed_path = '/simple-path?query=params'
+          expect(subject).to be_valid
+        end
+      end
+
+      context 'invalid formats' do
+        example 'providing a url instead of a path' do
+          subject.transformed_path = 'https://example.com'
+          expect(subject).not_to be_valid
+        end
+
+        example 'providing a common string instead of a path' do
+          subject.transformed_path = 'a normal string'
+          expect(subject).not_to be_valid
+        end
+
+        example 'including spaces inside the path' do
+          subject.transformed_path = '/a cool path'
           expect(subject).not_to be_valid
         end
       end

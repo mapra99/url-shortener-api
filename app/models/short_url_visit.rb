@@ -3,8 +3,8 @@ class ShortUrlVisit < ApplicationRecord
 
   before_save :set_visited_at
 
-  scope :most_recent, -> { order(visited_at: :desc) }
-  scope :latest, -> { most_recent.first }
+  scope :most_recent_order, -> { order(visited_at: :desc) }
+  scope :latest_since, ->(date) { where('visited_at > ?', date) }
 
   private
 
