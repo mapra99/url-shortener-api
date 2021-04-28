@@ -5,6 +5,7 @@ class ShortUrlVisit < ApplicationRecord
 
   scope :most_recent_order, -> { order(visited_at: :desc) }
   scope :latest_since, ->(date) { where('visited_at > ?', date) }
+  scope :older_than, ->(date) { where('visited_at < ?', date) }
 
   private
 
