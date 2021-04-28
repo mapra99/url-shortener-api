@@ -70,7 +70,7 @@ This project is a backend API. Following the setup steps, you'll get the API run
 
 Feel free to visit the [API docs here](https://documenter.getpostman.com/view/10455715/TzK16vGK#47d54b79-36ac-4c95-8b1b-b07c9ace094f).
 
-The project is currently using sidekiq to have a scheduled background job that removes old visited that have been unvisited for 6 months. To monitor these resources you can go to http://localhost:3000/sidekiq.
+The project is currently using sidekiq to have a scheduled background job that removes old urls that haven't been visited in the last 6 months. To monitor these resources you can go to http://localhost:3000/sidekiq.
 
 ### Run tests
 
