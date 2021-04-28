@@ -1,5 +1,6 @@
 class Api::V1::ShortUrlsController < Api::V1::ApplicationController
   before_action :base_url
+  after_action :track_url_visit, only: :redirect
 
   def create
     @short_url = ShortUrl.create(short_url_params)
@@ -22,5 +23,11 @@ class Api::V1::ShortUrlsController < Api::V1::ApplicationController
 
   def base_url
     @base_url ||= request.base_url
+  end
+
+  def track_url_visit
+    return if @short_url.blank?
+
+    @short_url.visits << ShortUrlVisit.create
   end
 end
