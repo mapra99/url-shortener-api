@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 require_relative "routes/short_url_constraint"
 
 Rails.application.routes.draw do

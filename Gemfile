@@ -28,6 +28,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Sidekiq as a background jobs framework
 gem 'sidekiq', '~>6.0.0'
 
+# Sidekiq-cron to schedule periodic jobs
+gem "sidekiq-cron", "~> 1.1"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
