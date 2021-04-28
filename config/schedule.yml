@@ -1,4 +1,4 @@
 url_clean_worker__short_url_destroy_old_urls:
   class: "UrlCleanWorker::ShortUrlDestroyOldUrlsJob"
-  cron: "* * * * *"
+  cron: "59 11 * * 6" # Weekly every saturday at midnight
   queue: default
