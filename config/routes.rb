@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 require_relative "routes/short_url_constraint"
 
 Rails.application.routes.draw do
@@ -15,4 +16,6 @@ Rails.application.routes.draw do
   constraints(ShortUrlConstraint) do
     match "*short_url", to: "api/v1/short_urls#redirect", via: :get
   end
+
+  mount Sidekiq::Web => "/sidekiq"
 end
