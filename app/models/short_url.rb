@@ -15,7 +15,7 @@ class ShortUrl < ApplicationRecord
   scope :ordered_by_recent, -> { order(created_at: :desc) }
   scope :with_ordered_visits, -> { includes(:visits).ordered_by_recent.order('short_url_visits.visited_at DESC') }
 
-  def self.destroy_old_urls(date = 1.minute.ago)
+  def self.destroy_old_urls(date = 6.months.ago)
     old_urls_ids = ShortUrlVisit.latest_since(date).pluck(:short_url_id)
     old_urls = where.not(id: old_urls_ids)
     old_urls.destroy_all
