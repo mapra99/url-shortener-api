@@ -1,0 +1,4 @@
+url_clean_worker__short_url_destroy_old_urls:
+  class: "UrlCleanWorker::ShortUrlDestroyOldUrlsJob"
+  cron: "* * * * *"
+  queue: default
